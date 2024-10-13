@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaUser, FaPhone } from 'react-icons/fa';
-import { deleteContact } from '../../redux/operations';
+import { deleteContact } from '../../redux/contactsOps.js';
 import CustomButton from '../CustomButton/CustomButton';
 import { selectDeletingItem, selectError } from '../../redux/selectors.js';
 import { CAPTION_DELETE, CAPTION_DELETEING } from '../../js/constants';

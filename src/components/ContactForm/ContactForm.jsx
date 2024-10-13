@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { addContact } from '../../redux/operations';
+import { addContact } from '../../redux/contactsOps';
 
 import { INITIAL_CONTACT } from '../../js/constants';
 import { FeedbackSchema } from '../../js/schema';

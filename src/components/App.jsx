@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from '../redux/operations';
+import { fetchContacts } from '../redux/contactsOps';
 import { selectError, selectIsLoading } from '../redux/selectors';
 import Infinity from './Infinity/Infinity';
 import TitleSection from './TitleSection/TitleSection';
