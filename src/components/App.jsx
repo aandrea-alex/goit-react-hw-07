@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from '../redux/contactsOps';
@@ -19,21 +18,21 @@ function App() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchContacts()) 
-    .unwrap()
-    .catch(() => { errNotify('Error fetching contacts');});
+    dispatch(fetchContacts())
+      .unwrap()
+      .catch(() => {
+        errNotify('Error fetching contacts');
+      });
   }, [dispatch]);
 
   return (
     <div className={styles.container}>
-       <Toaster />
+      <Toaster />
       <TitleSection>{TITLE}</TitleSection>
       <ContactForm />
-      <SearchBox >
-        {SEARCH_LABEL}
-      </SearchBox>
+      <SearchBox>{SEARCH_LABEL}</SearchBox>
       {isLoading && !error && <Infinity isLoading={isLoading} />}
-      <ContactList  />
+      <ContactList />
     </div>
   );
 }

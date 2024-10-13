@@ -5,11 +5,16 @@ import { addContact } from '../../redux/contactsOps';
 
 import { INITIAL_CONTACT } from '../../js/constants';
 import { FeedbackSchema } from '../../js/schema';
-import { LABEL_NAME, LABEL_PHONE, CAPTION_ADD, CAPTION_ADDING, } from '../../js/constants';
+import {
+  LABEL_NAME,
+  LABEL_PHONE,
+  CAPTION_ADD,
+  CAPTION_ADDING,
+} from '../../js/constants';
 import { selectError, selectIsAdding } from '../../redux/selectors';
-import { successNotify} from  '../../notification/success-notify';
+import { successNotify } from '../../notification/success-notify';
 import { errNotify } from '../../notification/error-notify';
-import { SUCCESS_ADD, ERR_ADD  } from '../../notification/constants';
+import { SUCCESS_ADD, ERR_ADD } from '../../notification/constants';
 import CustomButton from '../CustomButton/CustomButton';
 import styles from './ContactForm.module.css';
 
@@ -22,10 +27,14 @@ const ContactForm = () => {
   const isError = useSelector(selectError);
 
   const handleSubmit = (values, actions) => {
-    dispatch(addContact(values)) 
-    .unwrap()
-    .then(() => { successNotify(SUCCESS_ADD);})
-    .catch(() => {  errNotify(ERR_ADD); });
+    dispatch(addContact(values))
+      .unwrap()
+      .then(() => {
+        successNotify(SUCCESS_ADD);
+      })
+      .catch(() => {
+        errNotify(ERR_ADD);
+      });
     !isError && actions.resetForm();
   };
 
@@ -67,7 +76,7 @@ const ContactForm = () => {
           </div>
         </div>
         <CustomButton typeBtn="submit">
-         {isOperation && !isError ? CAPTION_ADDING : CAPTION_ADD}
+          {isOperation && !isError ? CAPTION_ADDING : CAPTION_ADD}
         </CustomButton>
       </Form>
     </Formik>

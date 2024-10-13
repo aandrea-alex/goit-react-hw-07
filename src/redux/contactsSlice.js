@@ -54,7 +54,6 @@ const contactsSlice = createSlice({
         state.error = action.payload;
       });
   },
-
 });
 
 export default contactsSlice.reducer;

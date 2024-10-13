@@ -1,8 +1,8 @@
 export const TITLE = 'Phone Book';
 export const SEARCH_LABEL = 'Find contacts by name:';
 export const INITIAL_CONTACT = {
-    name: '',
-    number: '',
+  name: '',
+  number: '',
 };
 
 export const ERR_SHORT = 'Too Short!';

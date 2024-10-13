@@ -6,7 +6,7 @@ import CustomButton from '../CustomButton/CustomButton';
 import { selectDeletingItem, selectError } from '../../redux/selectors.js';
 import { CAPTION_DELETE, CAPTION_DELETEING } from '../../js/constants';
 import { SUCCESS_DELETE, ERR_DELETE } from '../../notification/constants.js';
-import { errNotify} from '../../notification/error-notify.js';
+import { errNotify } from '../../notification/error-notify.js';
 import { successNotify } from '../../notification/success-notify.js';
 import styles from './ContactItem.module.css';
 
@@ -15,10 +15,14 @@ const ContactItem = ({ contact: { id, name, number } }) => {
   const isError = useSelector(selectError);
   const isOperation = useSelector(selectDeletingItem) === id;
   const handleDeleteItem = () => {
-    dispatch(deleteContact(id))   
-    .unwrap()
-    .then(() => { successNotify(SUCCESS_DELETE)})
-    .catch(() => { errNotify(ERR_DELETE)});
+    dispatch(deleteContact(id))
+      .unwrap()
+      .then(() => {
+        successNotify(SUCCESS_DELETE);
+      })
+      .catch(() => {
+        errNotify(ERR_DELETE);
+      });
   };
 
   return (
@@ -32,7 +36,7 @@ const ContactItem = ({ contact: { id, name, number } }) => {
         </p>
       </div>
       <CustomButton onClick={handleDeleteItem} typeBtn={'button'}>
-      {isOperation && !isError ? CAPTION_DELETEING : CAPTION_DELETE}
+        {isOperation && !isError ? CAPTION_DELETEING : CAPTION_DELETE}
       </CustomButton>
     </React.Fragment>
   );
