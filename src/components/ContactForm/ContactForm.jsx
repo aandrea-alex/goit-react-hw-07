@@ -1,11 +1,12 @@
 import { useId } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/operations';
 
 import { INITIAL_CONTACT } from '../../js/constants';
 import { FeedbackSchema } from '../../js/schema';
-import { LABEL_NAME, LABEL_PHONE, CAPTION_ADD } from '../../js/constants';
+import { LABEL_NAME, LABEL_PHONE, CAPTION_ADD, CAPTION_ADDING, } from '../../js/constants';
+import { selectError, selectIsAdding } from '../../redux/selectors';
 
 import CustomButton from '../CustomButton/CustomButton';
 import styles from './ContactForm.module.css';
@@ -15,9 +16,12 @@ const ContactForm = () => {
   const phoneId = useId();
   const dispatch = useDispatch();
 
+  const isOperation = useSelector(selectIsAdding);
+  const isError = useSelector(selectError);
+
   const handleSubmit = (values, actions) => {
     dispatch(addContact(values));
-    actions.resetForm();
+    !isError && actions.resetForm();
   };
 
   return (
@@ -57,7 +61,9 @@ const ContactForm = () => {
             </span>
           </div>
         </div>
-        <CustomButton typeBtn="submit">{CAPTION_ADD}</CustomButton>
+        <CustomButton typeBtn="submit">
+         {isOperation && !isError ? CAPTION_ADDING : CAPTION_ADD}
+        </CustomButton>
       </Form>
     </Formik>
   );
