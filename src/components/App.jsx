@@ -10,6 +10,7 @@ import ContactList from './ContactList/ContactList';
 import { SEARCH_LABEL, TITLE } from '../js/constants';
 import SearchBox from './SearchBox/SearchBox';
 import { Toaster } from 'react-hot-toast';
+import { errNotify } from '../notification/error-notify';
 import styles from './App.module.css';
 
 function App() {
@@ -18,7 +19,9 @@ function App() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(fetchContacts()) 
+    .unwrap()
+    .catch(() => { errNotify('Error fetching contacts');});
   }, [dispatch]);
 
   return (

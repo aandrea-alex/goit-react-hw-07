@@ -5,6 +5,9 @@ import { deleteContact } from '../../redux/operations';
 import CustomButton from '../CustomButton/CustomButton';
 import { selectDeletingItem, selectError } from '../../redux/selectors.js';
 import { CAPTION_DELETE, CAPTION_DELETEING } from '../../js/constants';
+import { SUCCESS_DELETE, ERR_DELETE } from '../../notification/constants.js';
+import { errNotify} from '../../notification/error-notify.js';
+import { successNotify } from '../../notification/success-notify.js';
 import styles from './ContactItem.module.css';
 
 const ContactItem = ({ contact: { id, name, number } }) => {
@@ -12,7 +15,10 @@ const ContactItem = ({ contact: { id, name, number } }) => {
   const isError = useSelector(selectError);
   const isOperation = useSelector(selectDeletingItem) === id;
   const handleDeleteItem = () => {
-    dispatch(deleteContact(id));
+    dispatch(deleteContact(id))   
+    .unwrap()
+    .then(() => { successNotify(SUCCESS_DELETE)})
+    .catch(() => { errNotify(ERR_DELETE)});
   };
 
   return (
